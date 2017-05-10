@@ -85,5 +85,8 @@ updateProfile(profile: Profile): void {
         type: type
       })
     };
+    },
+  countMessages(): number {
+    return Messages.collection.find().count();
   }
 });
