@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from 'ionic-angular';
 import * as Moment from 'moment';
 import { Observable } from 'rxjs';
 import { Chats, Messages } from '../../../../imports/collections';
 import { Chat, MessageType } from '../../../../imports/models';
+import { MessagesPage } from '../messages/messages';
 import template from './chats.html';
  
 @Component({
@@ -11,7 +13,7 @@ import template from './chats.html';
 export class ChatsPage implements OnInit {
   chats;
 
-  constructor() {
+  constructor(private navCtrl: NavController) {
   }
   
 ngOnInit() {
@@ -31,8 +33,13 @@ ngOnInit() {
         )
       ).zone();
       }
- 
+      
+  showMessages(chat): void {
+    this.navCtrl.push(MessagesPage, {chat});
+  }
+  
   removeChat(chat: Chat): void {
-    Chats.remove({_id: chat._id}).subscribe(() => {});
+    Chats.remove({_id: chat._id}).subscribe(() => {
+    });
   }
 }
